@@ -12,6 +12,6 @@ function solution(a) {
   const newArr = [];
   for (let i = 0; i < a.length; i++) {
     newArr.push(arr[i] - a[i]);
-    console.log(newArr[i]);
   }
+  console.log(newArr.join(" "));
 }
