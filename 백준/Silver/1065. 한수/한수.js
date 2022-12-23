@@ -12,9 +12,7 @@ function solution(num) {
       for (let j = 0; j < i.length - 1; j++) {
         dif.add(+i[j] - +i[j + 1]);
       }
-      if (dif.size === 1) {
-        count++;
-      }
+      dif.size === 1 ? count++ : 0;
     } else {
       count++;
     }
