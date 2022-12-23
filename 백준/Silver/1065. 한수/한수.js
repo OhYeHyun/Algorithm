@@ -10,11 +10,9 @@ function solution(num) {
     if (i.length >= 3) {
       const dif = new Set();
       for (let j = 0; j < i.length - 1; j++) {
-        let first = +i[j];
-        let second = +i[j + 1];
-        dif.add(first - second);
+        dif.add(+i[j] - +i[j + 1]);
       }
-      if (dif.size === 1 && !dif.has(NaN)) {
+      if (dif.size === 1) {
         count++;
       }
     } else {
