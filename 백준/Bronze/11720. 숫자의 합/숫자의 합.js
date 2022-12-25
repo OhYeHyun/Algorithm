@@ -4,9 +4,10 @@ let input = require("fs").readFileSync(filePath).toString().trim().split("\n");
 solution(input);
 
 function solution(a) {
-  let sum = 0;
-  for (let i = 0; i < a[0]; i++) {
-    sum += +a[1][i];
-  }
-  console.log(sum);
+  console.log(
+    a[1]
+      .split("")
+      .map(Number)
+      .reduce((a, b) => a + b)
+  );
 }
