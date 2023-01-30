@@ -1,7 +1,10 @@
 const filePath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
-let input = require("fs").readFileSync(filePath).toString().trim().split("\n");
-
-input.shift();
+let input = require("fs")
+  .readFileSync(filePath)
+  .toString()
+  .trim()
+  .split("\n")
+  .slice(1);
 
 for (let i = 0; i < input.length; i++) {
   let [num, str] = input[i].split(" ");
@@ -9,8 +12,10 @@ for (let i = 0; i < input.length; i++) {
 }
 
 function solution(n, s) {
-  for (let i = 0; i < s.length; i++) {
-    process.stdout.write(s[i].repeat(n));
-  }
-  console.log();
+  console.log(
+    s
+      .split("")
+      .map((e) => e.repeat(n))
+      .join("")
+  );
 }
