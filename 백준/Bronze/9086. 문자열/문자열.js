@@ -5,7 +5,7 @@ const first = input.shift();
 solution(input);
 
 function solution(str) {
-  for (let i = 0; i < first; i++) {
-    console.log(str[i][0] + str[i][str[i].length - 1]);
-  }
+  str.forEach((e) => {
+    console.log(e[0] + e[e.length - 1]);
+  });
 }
