@@ -6,46 +6,25 @@ solution(input);
 function solution(arr) {
   let sum = 0;
   let point = 0;
+  const table = {
+    "A+": 4.5,
+    A0: 4.0,
+    "B+": 3.5,
+    B0: 3.0,
+    "C+": 2.5,
+    C0: 2.0,
+    "D+": 1.5,
+    D0: 1.0,
+    F: 0.0,
+  };
   arr.forEach((e) => {
     e = e.split(" ");
     e.shift();
-    if (e[1] == "A+") {
-      sum += Number(e[0]) * 4.5;
-      point += Number(e[0]);
-    }
-    if (e[1] == "A0") {
-      sum += Number(e[0]) * 4.0;
-      point += Number(e[0]);
-    }
-    if (e[1] == "B+") {
-      sum += Number(e[0]) * 3.5;
-      point += Number(e[0]);
-    }
-    if (e[1] == "B0") {
-      sum += Number(e[0]) * 3.0;
-      point += Number(e[0]);
-    }
-    if (e[1] == "C+") {
-      sum += Number(e[0]) * 2.5;
-      point += Number(e[0]);
-    }
-    if (e[1] == "C0") {
-      sum += Number(e[0]) * 2.0;
-      point += Number(e[0]);
-    }
-    if (e[1] == "D+") {
-      sum += Number(e[0]) * 1.5;
-      point += Number(e[0]);
-    }
-    if (e[1] == "D0") {
-      sum += Number(e[0]) * 1.0;
-      point += Number(e[0]);
-    }
-    if (e[1] == "F") {
-      sum += Number(e[0]) * 0;
-      point += Number(e[0]);
-    }
     if (e[1] == "P");
+    else {
+      sum += Number(e[0]) * table[e[1]];
+      point += Number(e[0]);
+    }
   });
   console.log(sum / point);
 }
