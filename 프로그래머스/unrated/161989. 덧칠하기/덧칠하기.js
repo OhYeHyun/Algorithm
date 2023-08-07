@@ -1,8 +1,7 @@
 function solution(n, m, section) {
     let [start, end] = [0, 0];
-    let cut = 0;
     let num = 0;
-    while (section.length !== 0) {
+    while (section.length) {
         if (num % 2 == 0) {
             [start, end] = [section[0], section[0] + m - 1];
             num++; 
