@@ -11,7 +11,6 @@ function solution(keymap, targets) {
             }
         })
     })
-    console.log(concat)
     targets.forEach((e) => {
         cnt = 0;
         [...e].forEach((el, index) => {
@@ -23,6 +22,5 @@ function solution(keymap, targets) {
         })
         answer.push(cnt);
     })
-    console.log(answer)
     return answer;
 }
