@@ -23,5 +23,4 @@ function solution(cards1, cards2, goal) {
         }
     })
     return answer;
-    
 }
