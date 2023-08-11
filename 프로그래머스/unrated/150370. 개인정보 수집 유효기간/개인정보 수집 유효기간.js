@@ -3,7 +3,7 @@ function solution(today, terms, privacies) {
     let answer = [];
     today = today.split(".").map(Number);
     
-    const total = Number(today[0]) * 12 * 28 + Number(today[1]) * 28 + Number(today[2]);
+    const total = today[0] * 12 * 28 + today[1] * 28 + today[2];
     terms.forEach((e) => {
         e = e.split(" ");
         term.set(e[0], e[1]);
