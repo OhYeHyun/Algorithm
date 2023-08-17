@@ -4,10 +4,10 @@ function solution(t, p) {
     t = t.split('');
     
     t.forEach((e, idx) => {
-        !t[idx + length - 1] ? -1 : arr.push(Number(t.slice(idx, idx + length).join('')));
+        !t[idx + length - 1] ? -1 : arr.push(+t.slice(idx, idx + length).join(''));
     })
     
-    arr = arr.filter((e) => e <= Number(p));
+    arr = arr.filter((e) => e <= +p);
     
     return arr.length;
 }
