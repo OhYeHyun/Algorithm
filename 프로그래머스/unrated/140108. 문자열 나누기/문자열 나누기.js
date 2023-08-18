@@ -1,6 +1,5 @@
 function solution(s) {
     s = s.split("");
-    let arrS = [];
     let cor = 0;
     let wrong = 0;
     let cnt = 0;
@@ -8,7 +7,6 @@ function solution(s) {
     
     s.forEach((e, idx) => {
         e !== start ? wrong++ : cor++
-        
         wrong == cor ? (
             start = s[idx + 1],
             cor = 0,
