@@ -8,7 +8,7 @@ function solution(ingredient) {
             answer++;
             ingredient.splice(idx, 4);
             if (idx !== 0) {
-                idx = idx - 3;
+                idx = idx - 3;                
             }
         } else if (idx > ingredient.length - 3) {
             boolean = false;
