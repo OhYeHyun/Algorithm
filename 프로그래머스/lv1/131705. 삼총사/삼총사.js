@@ -5,7 +5,7 @@ function solution(number) {
         for (let i = idx + 1; i < number.length; i++ ) {
             let key = (e + number[i]) * -1;
             for (let j = i + 1; j < number.length; j++) {
-                number[j] == key ? (answer++, console.log(idx, i, j, "key : ", key)) : -1; 
+                number[j] == key ? answer++ : -1; 
             }
         }
     })
