@@ -8,7 +8,7 @@ function solution(id_list, report, k) {
         arrR[id_list.indexOf(e[1])] += !!arrR[id_list.indexOf(e[1])] ? " " + e[0] : e[0] ;
     })
     
-    arrR.forEach((e, idx) => {
+    arrR.forEach((e) => {
         e = e.split(" ");
         e.length >= k ? (
             e.forEach((e) => {
