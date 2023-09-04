@@ -7,7 +7,7 @@ function solution(lottos, win_nums) {
         win_nums.includes(e) ? count++ : (e == 0 ? zero++ : -1);
     });
    
-    answer = [ count == 0 && zero == 0 ? 6 : 7 - count - zero , count == 0 ? 6 : 7 - count];
+    answer = [count == 0 && zero == 0 ? 6 : 7 - count - zero, count == 0 ? 6 : 7 - count];
     
     return answer;
 }
