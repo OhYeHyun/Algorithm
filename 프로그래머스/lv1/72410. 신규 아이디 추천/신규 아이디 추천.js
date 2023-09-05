@@ -5,10 +5,10 @@ function solution(new_id) {
         .toLowerCase()
         .replace(/[^-_.a-z0-9]/g, "")
         .replace(/\.+/g, ".")
-        .replace(/^\./g, "")
-        .replace(/^$/g, "a")
+        .replace(/^\./, "")
+        .replace(/^$/, "a")
         .substring(0, 15)
-        .replace(/\.$/g, "");
+        .replace(/\.$/, "");
 
     answer.length < 3 ? answer += answer.at(-1).repeat(3 - answer.length) : -1;
     
