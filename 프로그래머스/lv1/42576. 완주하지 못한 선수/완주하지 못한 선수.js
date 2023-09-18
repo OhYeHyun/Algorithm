@@ -1,14 +1,17 @@
 function solution(participant, completion) {
-    let obj = {};
-    participant.forEach(player => {
-        if(obj[player] > 0){
-            obj[player]++;
-        }else{
-            obj[player] = 1;
-        }
-    })
-    completion.forEach(player => {
-        obj[player]--;
-    })
-    return Object.keys(obj).filter(player => obj[player] > 0).toString('');
+    const map = new Map();
+
+    for(let i = 0; i < participant.length; i++) {
+        let a = participant[i], 
+            b = completion[i];
+
+        map.set(a, (map.get(a) || 0) + 1);
+        map.set(b, (map.get(b) || 0) - 1);
+    }
+
+    for(let [k, v] of map) {
+        if(v > 0) return k;
+    }
+
+    return 'nothing';
 }
