@@ -1,8 +1,8 @@
 function solution(x, n) {
-    let answer = [], sum = x;
-    for(let i = 0; i < n; i++) {
-        answer.push(sum)
-        sum += x;
+    let answer = [];
+    
+    for(let i = 1; i <= n; i++) {
+        answer.push(x * i)
     }
     
     return answer;
