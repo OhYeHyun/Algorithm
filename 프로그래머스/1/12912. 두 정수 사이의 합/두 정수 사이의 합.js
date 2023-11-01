@@ -1,9 +1,9 @@
 function solution(a, b) {
-    let answer = [];
+    let answer = 0;
     
     for (let i = Math.min(a, b); i <= Math.max(a, b); i++) {
-        answer.push(i);
+        answer += i
     }
+    return answer;
     
-    return a !== b ? answer.reduce((acc, cur) => acc += cur) : a;
 }
