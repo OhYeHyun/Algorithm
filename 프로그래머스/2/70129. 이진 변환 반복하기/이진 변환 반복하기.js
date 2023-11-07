@@ -1,16 +1,13 @@
 function solution(s) {
-    let removed = 0;
-    let cnt = 0;
-    let answer = [];
+    let answer = [0, 0];
     
     while (s !== "1") {
         let sLength = s.length;
         s = s.split("").filter((item) => item == "1").join("");
-        removed += sLength - s.length;
-        cnt++;
+        answer[0]++;
+        answer[1] += sLength - s.length;
         s = s.length.toString(2);
     }
-    answer.push(cnt, removed)
     
     return answer;
 }
