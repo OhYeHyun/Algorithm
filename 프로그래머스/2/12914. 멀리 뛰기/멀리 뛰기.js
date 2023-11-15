@@ -1,8 +1,15 @@
 function solution(n) {
-    let a = 1, b = 2;
+    let answer = 0;
+    let dp = [];
+    
+    dp[1] = 1;
+    dp[2] = 2;
+    
     for (let i = 3; i <= n; i++) {
-        [a, b] = [b, a];
-        b = (a + b) % 1234567;
+        dp[i] = dp[i - 1] + dp[i - 2] % 1234567;
     }
-    return n == 1 ? 1 : b;
+    
+    answer = dp[n];
+    
+    return answer % 1234567;
 }
