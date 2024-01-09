@@ -1,5 +1,4 @@
 function solution(bandage, health, attacks) {
-    let answer = 0;
     let last = attacks.at(-1)[0];
     let hp = health;
     let success = 0;
@@ -19,16 +18,12 @@ function solution(bandage, health, attacks) {
                 success = 0;
             }
         }
-        
+    
         if (hp > health) hp = health;
-        
         if (hp <= 0) {
-            hp = -1;
-            break;
+            return -1;
         }
     }
     
-    answer = hp;
-    
-    return answer;
+    return hp;
 }
