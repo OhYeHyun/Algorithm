@@ -1,21 +1,12 @@
 function solution(s) {
-    let ss = s.split(/{|}/).filter((item) => item !== "," && item !== "");
+    let ss = s.split(/{|}/).filter((item) => item !== "," && item !== "").sort((a, b) => a.length - b.length);
     let answer = [];
-    let j = 1;
     
-    for (let i = 0; i < ss.length; i) {
-        let arr = ss[i].split(",");
-        if (arr.length == j) {
-            answer.push(...arr)
-            j++;
-            i = 0;
-        } else if (j > ss.length) {
-            break;
-        } else {
-            i++
-        }
+    for (let i = 0; i < ss.length; i++) {
+        let arr = ss[i].split(",").map((item) => + item)
+        answer.push(...arr)
     }
-    answer = [...new Set([...answer])].map((item) => +item);
+    answer = [...new Set([...answer])];
     
     return answer;
 }
