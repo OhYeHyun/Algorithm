@@ -7,7 +7,7 @@ function solution(n, k) {
         if (num !== 0 && num !== 1) {       
             if (num == 2 || num == 3) answer++;
             for (let j = 2; j <= Math.sqrt(num); j++) {
-                if (num % j == 0) break;;
+                if (num % j == 0) break;
                 if (j == Math.floor(Math.sqrt(num))) answer++;
             }
         }
