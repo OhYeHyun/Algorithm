@@ -14,7 +14,7 @@ function solution(maps) {
             let newX = curX + dirX;  
             
             if (newX >= 0 && newX <= goalX && newY >= 0 && newY <= goalY && maps[newY][newX]) {
-                maps[newY][newX] = 0;
+                maps[curY][curX] = 0;
                 queue.push([newY, newX, count + 1]);
             }
         }
