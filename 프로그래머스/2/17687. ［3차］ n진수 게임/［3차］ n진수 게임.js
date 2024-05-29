@@ -7,7 +7,8 @@ function solution(n, t, m, p) {
         strNum += (num++).toString(n).toUpperCase();
     }
     
-    answer = strNum.split('').filter((_, i) => i % m == (p - 1)).slice(0, t).join('');
+    answer = strNum.split('').filter((_, i) => i % m == (p - 1))
+        .slice(0, t).join('');
     
     return answer;
 }
