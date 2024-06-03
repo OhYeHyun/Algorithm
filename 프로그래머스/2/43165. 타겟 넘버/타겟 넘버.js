@@ -1,19 +1,16 @@
 function solution(numbers, target) {
     let answer = 0;
 
-    const dfs = (numbers,idx,curX) => {
-        if (idx == numbers.length && curX == target) {
-            answer += 1;
-            return
-        } else if (idx == numbers.length && curX != target) {
-            return;
-        }
+    const dfs = (idx, curN) => {
+        if (idx == numbers.length) {
+            curN == target ? answer++ : -1;
+            return;  
+        } 
         
-        dfs(numbers, idx + 1, curX - numbers[idx])
-        dfs(numbers, idx + 1, curX + numbers[idx]);
+        dfs(idx + 1, curN + numbers[idx]);
+        dfs(idx + 1, curN - numbers[idx]);
     }
     
-    dfs(numbers,0,0);
-
+    dfs(0, 0)
     return answer;
 }
