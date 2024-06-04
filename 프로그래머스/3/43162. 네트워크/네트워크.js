@@ -7,9 +7,7 @@ function solution(n, computers) {
         visited[i] = true;
         
         for (let j = 0; j < len; j++) {
-            if (!visited[j] && computers[i][j] == 1) {
-                dfs(j);
-            }
+            if (!visited[j] && computers[i][j] == 1) dfs(j);
         }        
     }
     
