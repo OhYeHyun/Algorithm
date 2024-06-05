@@ -1,28 +1,28 @@
 function solution(begin, target, words) {
     let answer = 0;
     const visited = new Array(words.length).fill(false);
-    const queue = [[begin, visited, answer]];
+    const queue = [[begin, answer]];
     
-    while (queue.length > 0) {
-        let [word, vArray, answer] = queue.shift();
-        
+    while (queue.length) {
+        let [word, answer] = queue.shift();
         if (word == target) return answer;
 
         for (let i = 0; i < words.length; i++) {
-            let cnt = 0;
-            if (vArray[i]) continue;
+            let diffCnt = 0;
+            if (visited[i]) continue;
             
             for (let j = 0; j < word.length; j++) {
                 if (word[j] == words[i][j]) {
                     continue;
                 } else {
-                    cnt++;
+                    diffCnt++;
                 }
-                if (cnt > 1) break;
+                
+                if (diffCnt > 1) break;
             }
-            if (cnt == 1) {
-                vArray[i] = true;
-                queue.push([words[i], vArray, answer + 1])
+            if (diffCnt == 1) {
+                visited[i] = true;
+                queue.push([words[i], answer + 1])
             }
         }
     }
