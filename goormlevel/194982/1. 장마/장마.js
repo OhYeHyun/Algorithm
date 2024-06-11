@@ -10,6 +10,7 @@ rl.on('line', (line) => {
     rl.close();
   }
 });
+
 rl.on('close', () => {
 	const [houseN, rainM] = input.shift();
 	let answer = input.shift();
