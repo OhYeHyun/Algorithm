@@ -5,31 +5,19 @@ public class Solution {
         int answer = 0;
         Stack<Integer> stack = new Stack<>();
         
-        int originCur = 0;
-        int orderCur = 0;
+        int orderIdx = 0;
         
-        while (orderCur < order.length) {
-            int orderBox = order[orderCur];
-            int originBox = originCur + 1;
-
-            if (orderBox == originBox) {
-                answer++;
-                originCur++;
-                orderCur++;
-                continue;
-            }
-            if (!stack.isEmpty() && orderBox == stack.peek()) {
-                stack.pop();
-                answer++;
-                orderCur++;
-                continue;
-            }
+        for (int i = 0; i < order.length; i++) {
+            stack.push(i + 1);
             
-            if (!stack.isEmpty() && stack.peek() > orderBox) {
-                return answer;
-            } else {
-                stack.push(originBox);
-                originCur++;
+            while (!stack.isEmpty()) {
+                if (stack.peek() == order[orderIdx]) {
+                    stack.pop();
+                    answer++;
+                    orderIdx++;
+                } else {
+                    break;
+                }
             }
         }
         return answer;
