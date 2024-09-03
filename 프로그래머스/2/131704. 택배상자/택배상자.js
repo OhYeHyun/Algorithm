@@ -15,14 +15,15 @@ function solution(order) {
             orderCur++;
             continue;
         }
-        if (orderBox === stack.at(-1)) {
+        
+        if (orderBox === stack[stack.length -1]) {
             stack.pop();
             answer++;
             orderCur++;
             continue;
         } 
         
-        if (stack.at(-1) > orderBox) {
+        if (stack[stack.length -1] > orderBox) {
             return answer;
         } else {
             stack.push(originBox)
