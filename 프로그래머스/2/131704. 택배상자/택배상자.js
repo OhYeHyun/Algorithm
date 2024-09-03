@@ -2,32 +2,17 @@ function solution(order) {
     let answer = 0;
     const stack = [];
     
-    let originCur = 0;
-    let orderCur = 0;
+    let orderIdx = 0;
     
-    while (orderCur < order.length) {
-        const orderBox = order[orderCur]
-        const originBox = originCur + 1;
-
-        if (orderBox === originBox) {
-            answer++;
-            originCur++;
-            orderCur++;
-            continue;
-        }
+    for (let i = 0; i < order.length; i++) {
+        stack.push(i + 1);
         
-        if (orderBox === stack[stack.length -1]) {
-            stack.pop();
-            answer++;
-            orderCur++;
-            continue;
-        } 
-        
-        if (stack[stack.length -1] > orderBox) {
-            return answer;
-        } else {
-            stack.push(originBox)
-            originCur++;
+        while (stack.length > 0) {
+            if (stack.at(-1) === order[orderIdx]) {
+                stack.pop();
+                answer++;
+                orderIdx++;
+            } else break;
         }
     }
     return answer;
