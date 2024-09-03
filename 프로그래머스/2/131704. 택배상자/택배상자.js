@@ -1,31 +1,33 @@
 function solution(order) {
     let answer = 0;
     const stack = [];
-    let originBox = 1;
+    
+    let originCur = 0;
+    let orderCur = 0;
+    
+    while (orderCur < order.length) {
+        const orderBox = order[orderCur]
+        const originBox = originCur + 1;
 
-    for (let i = 0; i < order.length; i++) {
-        const orderBox = order[i];
-
-        if (stack.length > 0 && stack[stack.length - 1] === orderBox) {
-            stack.pop();
+        if (orderBox === originBox) {
             answer++;
+            originCur++;
+            orderCur++;
             continue;
         }
-
-        while (originBox <= orderBox) {
-            if (originBox === orderBox) {
-                answer++;
-                originBox++;
-                break;
-            } else {
-                stack.push(originBox++);
-            }
-        }
-
-        if (stack.length > 0 && stack[stack.length - 1] > orderBox) {
-            break;
+        if (orderBox === stack.at(-1)) {
+            stack.pop();
+            answer++;
+            orderCur++;
+            continue;
+        } 
+        
+        if (stack.at(-1) > orderBox) {
+            return answer;
+        } else {
+            stack.push(originBox)
+            originCur++;
         }
     }
-
     return answer;
 }
