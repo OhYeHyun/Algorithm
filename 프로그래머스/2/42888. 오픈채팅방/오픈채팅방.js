@@ -9,17 +9,15 @@ function solution(record) {
         if (command === 'Change' || command === 'Enter') {
             userMap.set(id, name);
         }
+    })
+    
+    record.forEach((message) => {
+        const [command, id] = message.split(" ");
         
         if (commandMap[command]) {
-            answer.push([id, `님이 ${commandMap[command]}`])
+            answer.push(`${userMap.get(id)}님이 ${commandMap[command]}`);
         }
     })
     
-    return answer.map((user) => {
-        const id = user[0]
-        const name = userMap.get(id);
-        user[0] = name;
-    
-        return user.join('');
-    })
+    return answer;
 }
