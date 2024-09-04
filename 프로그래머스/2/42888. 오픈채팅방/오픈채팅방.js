@@ -6,14 +6,11 @@ function solution(record) {
     record.forEach((message) => {
         const [command, id, name] = message.split(" ");
         
-        if (command === 'Change') {
+        if (command === 'Change' || command === 'Enter') {
             userMap.set(id, name);
         }
         
         if (commandMap[command]) {
-            if (command === 'Enter') {
-                userMap.set(id, name);
-            }
             answer.push([id, `님이 ${commandMap[command]}`])
         }
     })
