@@ -1,7 +1,7 @@
 function solution(x, y, n) {
     let answer = 0;
     const expressions = [["+", n], ["*", 2], ["*", 3]];
-    const xSet = new Set();
+    const xSet = new Set([x]);
     
     let queueIdx = 0;
     const queue = [[x, answer]];
