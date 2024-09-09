@@ -3,44 +3,24 @@ import java.util.regex.*;
 
 public class Solution {
     public String[] solution(String[] files) {
-        Arrays.sort(files, new FileComparator());
-        return files;
-    }
+        Pattern p = Pattern.compile("^([\\D]+)(\\d{1,5})");
+        
+        Arrays.sort(files, new Comparator<String>() {
+            @Override
+            public int compare(String a, String b) {
+                Matcher mA = p.matcher(a.toLowerCase());
+                Matcher mB = p.matcher(b.toLowerCase());
 
-    private static class FileComparator implements Comparator<String> {
-        @Override
-        public int compare(String a, String b) {
-            FileName aFile = parseFileName(a);
-            FileName bFile = parseFileName(b);
+                mA.find();
+                mB.find();
 
-            int headComparison = aFile.head.compareToIgnoreCase(bFile.head);
-            if (headComparison != 0) {
-                return headComparison;
+                if (!mA.group(1).equals(mB.group(1))) {
+                    return mA.group(1).compareTo(mB.group(1));
+                } else {
+                    return Integer.parseInt(mA.group(2)) - Integer.parseInt(mB.group(2));
+                }
             }
-            return Integer.compare(aFile.number, bFile.number);
-        }
-    }
-
-    private static FileName parseFileName(String file) {
-        Pattern pattern = Pattern.compile("^([\\D]+)(\\d{1,5})");
-        Matcher matcher = pattern.matcher(file);
-
-        if (matcher.find()) {
-            String head = matcher.group(1);
-            int number = Integer.parseInt(matcher.group(2));
-            return new FileName(head, number);
-        }
-
-        return new FileName("", 0);
-    }
-
-    private static class FileName {
-        String head;
-        int number;
-
-        FileName(String head, int number) {
-            this.head = head;
-            this.number = number;
-        }
+        });
+        return files;
     }
 }
