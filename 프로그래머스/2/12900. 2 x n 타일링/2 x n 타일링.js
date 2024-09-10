@@ -1,17 +1,12 @@
 function solution(n) {
-    let answer = 1;
+    if (n === 1) return 1;
+    if (n === 2) return 2;
+    
     let [first, second] = [1, 2];
     
-    if (n === 1 || n === 2) return answer;
-    
     for (let i = 3; i <= n; i++) {
-        first %= 1000000007;
-        second %= 1000000007;
-        
-        [first, second] = [second, first + second];
+        [first, second] = [second, (first + second) % 1000000007];
     }
-    
-    answer = second % 1000000007;
-    
-    return answer;
+        
+    return second;
 }
