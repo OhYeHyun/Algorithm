@@ -1,10 +1,10 @@
 public class Solution {
     public int solution(int n) {
-        int answer = 1;
+        if (n == 1) return 1;
+        if (n == 2) return 2;
+        
         int first = 1;
         int second = 2;
-
-        if (n == 1 || n == 2) return answer;
 
         for (int i = 3; i <= n; i++) {
             int temp = (first + second) % 1000000007;
@@ -12,8 +12,6 @@ public class Solution {
             second = temp;
         }
 
-        answer = second;
-
-        return answer;
+        return second;
     }
 }
