@@ -1,25 +1,24 @@
 function solution(numbers) {
     const primeSet = new Set();
     const numLength = numbers.length;
+    const visited = new Array(numLength).fill(false);
     
-    const dfs = (current, visited) => {    
-        const number = parseInt(current);
-        if (isPrime(number)) primeSet.add(number);
+    const dfs = (current) => {    
+        if (isPrime(current)) primeSet.add(current);
         
         for (let i = 0; i < numLength; i++) {
             if (!visited[i]) {
                 visited[i] = true;
-                dfs(current + numbers[i], visited);
+                dfs(current * 10 + parseInt(numbers[i]));
                 visited[i] = false;
             }
         }
     }
     
     for (let i = 0; i < numLength; i++) {
-        const visited = new Array(numLength).fill(false);
         visited[i] = true;
-        
-        dfs(numbers[i], visited);
+        dfs(parseInt(numbers[i]));
+        visited[i] = false;
     }
     
     return primeSet.size;
