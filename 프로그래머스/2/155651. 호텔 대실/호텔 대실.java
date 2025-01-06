@@ -2,36 +2,21 @@ import java.util.*;
 
 class Solution {
     public int solution(String[][] book_time) {
-        ArrayList<Integer> empty = new ArrayList<>();
-        empty.add(0);
+        PriorityQueue<Integer> room = new PriorityQueue<>();
+
+        Arrays.sort(book_time, (a, b) -> a[0].compareTo(b[0]));
         
-        Arrays.sort(book_time, new Comparator<String[]>() {
-            @Override
-            public int compare(String[] a, String[] b) {
-                return a[0].compareTo(b[0]);
-            }
-        });
-        
-        for (int i = 0; i < book_time.length; i++) {
-            int start = convert(book_time[i][0]);
-            int end = convert(book_time[i][1]);
+        for (String[] time : book_time) {
+            int start = convert(time[0]);
+            int end = convert(time[1]);
             
-            boolean assign = false;
-            for (int j = 0; j < empty.size(); j++) {
-                int emptyTime = empty.get(j);
-                
-                if (emptyTime <= start) {
-                    empty.set(j, end + 10);
-                    assign = true;
-                    break;
-                }
+            if (!room.isEmpty() && room.peek() <= start) {
+                room.poll();
             }
-            if (!assign) {
-                empty.add(end + 10);
-            }
+            room.offer(end + 10);
         }     
         
-        return empty.size();
+        return room.size();
     }
     
     public int convert(String time) {
