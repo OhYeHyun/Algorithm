@@ -10,11 +10,9 @@ class Solution {
             int duration = calculateDuration(mm[0], mm[1]);
             String played = playedMusic(duration, mm[3]);
             
-            if (isMatch(played, m)) {
-                if (duration > maxDuration) {
-                    maxDuration = duration;
-                    answer = mm[2];
-                }
+           if (isMatch(played, m) && duration > maxDuration) {
+                maxDuration = duration;
+                answer = mm[2];
             }
         }
         
@@ -26,7 +24,7 @@ class Solution {
         int mLen = m.length();
 
         for (int i = 0; i <= pLen - mLen; i++) {
-            if (played.substring(i, i + mLen).equals(m)) {
+            if (played.startsWith(m, i)) {
                 if (i + mLen < pLen && played.charAt(i + mLen) == '#') {
                     continue;
                 }
@@ -37,32 +35,32 @@ class Solution {
     }
     
     private int calculateDuration(String start, String end) {
-        int startH = Integer.parseInt(start.split(":")[0]);
-        int startM = Integer.parseInt(start.split(":")[1]);
-        int endH = Integer.parseInt(end.split(":")[0]);
-        int endM = Integer.parseInt(end.split(":")[1]);
+        String[] startTime = start.split(":");
+        String[] endTime = end.split(":");
+
+        int startMin = Integer.parseInt(startTime[0]) * 60 + Integer.parseInt(startTime[1]);
+        int endMin = Integer.parseInt(endTime[0]) * 60 + Integer.parseInt(endTime[1]);
         
-        return endH * 60 + endM - (startH * 60 + startM);
+        return endMin - startMin;
     }
     
     private String playedMusic(int duration, String music) {
+        StringBuilder played = new StringBuilder();
         int idx = 0;
-        String played = "";
+        int len = music.length();
         
-        while (duration > 0) {
-            String target = Character.toString(music.charAt(idx));
-            played += target;
+        while (duration > 0) {            
+            played.append(music.charAt(idx));
             
-            idx = (idx + 1) % music.length();
-            
-            if (music.charAt(idx) == '#') {
-                played += "#";
-                idx = (idx + 1) % music.length();
+            if (idx + 1 < len && music.charAt(idx + 1) == '#') {
+                played.append('#');
+                idx++;
             }
-            
+
+            idx = (idx + 1) % len;
             duration--;
         }
         
-        return played;
+        return played.toString();
     }
 }
