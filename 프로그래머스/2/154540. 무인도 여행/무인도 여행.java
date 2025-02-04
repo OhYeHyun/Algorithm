@@ -9,7 +9,7 @@ class Solution {
             answer.add(calculateIsland(maps, start));
         }
         
-        if (answer.size() == 0) {
+        if (answer.isEmpty()) {
             answer.add(-1);
         }
 
@@ -17,13 +17,13 @@ class Solution {
     }
     
     private int calculateIsland(String[] maps, int[] start) {
-        List<Integer[]> islands = new ArrayList<>();
+        List<int[]> islands = new ArrayList<>();
         
         int row = maps.length;
         int col = maps[0].length();
         
-        Queue<Integer[]> q = new LinkedList<>();
-        q.add(new Integer[]{start[0], start[1]});
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[]{start[0], start[1]});
         
         int[][] d = {{1, 0}, {0, 1}, {0, -1}, {-1, 0}};
         boolean[][] visited = new boolean[row][col];
@@ -32,7 +32,7 @@ class Solution {
         int sum = 0;
         
         while (!q.isEmpty()) {
-            Integer[] curPosition = q.poll();
+            int[] curPosition = q.poll();
             islands.add(curPosition);
             
             int y = curPosition[0];
@@ -47,7 +47,7 @@ class Solution {
                 
                 if (newY >= 0 && newY < row && newX >= 0 && newX < col 
                     && maps[newY].charAt(newX) != 'X' && !visited[newY][newX]) {
-                    q.add(new Integer[]{newY, newX});
+                    q.add(new int[]{newY, newX});
                     visited[newY][newX] = true;
                 }
             }
@@ -57,12 +57,14 @@ class Solution {
         return sum;
     }
     
-    private void updateMaps(String[] maps, List<Integer[]> islands) {
-        for (Integer[] island : islands) {
+    private void updateMaps(String[] maps, List<int[]> islands) {
+        for (int[] island : islands) {
             int y = island[0];
             int x = island[1];
             
-            maps[y] = maps[y].substring(0, x) + "X" + maps[y].substring(x + 1);
+            StringBuilder sb = new StringBuilder(maps[y]);
+            sb.setCharAt(x, 'X');
+            maps[y] = sb.toString();        
         }
     }
     
