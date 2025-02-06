@@ -1,84 +1,53 @@
 import java.util.*;
 
 class Solution {
-    public String solution(String p) {        
-        return loop(p);
+    public String solution(String p) {
+        return transform(p);
     }
-    
-    private String loop(String str) {
-        String answer = "";
-        
-        if (str.equals("")) {
+
+    private String transform(String str) {
+        if (str.isEmpty()) {
             return "";
         }
-        
+
         String[] divided = divide(str);
-        if (isCorrect(divided[0])) {
-            answer = divided[0];
-            answer += loop(divided[1]);
-        } else {        
-            answer += incorrect(divided[0], divided[1]);
-        }        
+        String u = divided[0];
+        String v = divided[1];
 
-        return answer;
+        if (isCorrect(u)) {
+            return u + transform(v);
+        } else {
+            return "(" + transform(v) + ")" + reverse(u.substring(1, u.length() - 1));
+        }
     }
-    
-    private String incorrect(String main, String sub) {
-        String s = main.substring(1, main.length() - 1);   
-        return "(" + loop(sub) + ")" + reverse(s);
-    }
-    
-    private String reverse(String str) {
-        
-        String result = str.replace("(", "O");
-        result = result.replace(")", "(");
-        return result.replace("O", ")");
-    }
-    
+
     private String[] divide(String str) {
-        Deque<String> q = new ArrayDeque<>();
-        Collections.addAll(q, str.split(""));
-        
-        int state = 0;
-        int idx = 1;
-        
-        while (!q.isEmpty()) {
-            String s = q.pollFirst();
-
-            if (s.equals("(")) {
-                state++;
+        int balance = 0;
+        for (int i = 0; i < str.length(); i++) {
+            balance += (str.charAt(i) == '(') ? 1 : -1;
+            if (balance == 0) {
+                return new String[]{str.substring(0, i + 1), str.substring(i + 1)};
             }
-            if (s.equals(")")) {
-                state--;
-            }
-            if (state == 0) {
-                return new String[]{str.substring(0, idx), str.substring(idx)};
-            }
-            
-            idx++;
         }
         return new String[]{str, ""};
     }
-                
-    private boolean isCorrect(String str) {
-        Deque<String> q = new ArrayDeque<>();
-        Collections.addAll(q, str.split(""));
-        
-        int state = 0;        
-        while (!q.isEmpty()) {
-            String s = q.pollFirst();
 
-            if (s.equals("(")) {
-                state++;
-            }
-            if (s.equals(")")) {
-                state--;
-            }
-            
-            if (state < 0) {
+    private boolean isCorrect(String str) {
+        int balance = 0;
+        for (char ch : str.toCharArray()) {
+            balance += (ch == '(') ? 1 : -1;
+            if (balance < 0) {
                 return false;
             }
         }
-        return true;
+        return balance == 0;
+    }
+
+    private String reverse(String str) {
+        StringBuilder sb = new StringBuilder();
+        for (char ch : str.toCharArray()) {
+            sb.append(ch == '(' ? ')' : '(');
+        }
+        return sb.toString();
     }
 }
