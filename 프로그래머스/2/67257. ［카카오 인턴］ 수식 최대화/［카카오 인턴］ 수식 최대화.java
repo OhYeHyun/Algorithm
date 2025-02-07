@@ -4,50 +4,47 @@ class Solution {
     public long solution(String expression) {
         long answer = 0;
         List<String[]> orders = generateOrder();
-        List<String> list = makeList(expression);
+        List<String> expressions = parseExpression(expression);
 
         for (String[] order : orders) {
-            List<String> copyList = new ArrayList<>(list);
-            long result = Long.parseLong(calculate(order, copyList));
-            if (result < 0) {
-                result *= -1;
-            }
-            answer = Math.max(answer, result);
+            List<String> copyExpressions = new ArrayList<>(expressions);
+            long result = Long.parseLong(evaluateExpression(order, copyExpressions));
+            answer = Math.max(answer, Math.abs(result));
         }
             
         return answer;
     }
     
-    private String calculate(String[] signs, List<String> list) {
-        for (String sign : signs) {
-            while (list.contains(sign)) {
-                int idx = list.indexOf(sign);
-                String result = calculateSign(list.get(idx - 1), list.get(idx + 1), list.get(idx));
+    private String evaluateExpression(String[] operators, List<String> expressions) {
+        for (String operator : operators) {
+            while (expressions.contains(operator)) {
+                int idx = expressions.indexOf(operator);
+                String result = applyOperation(expressions.get(idx - 1), expressions.get(idx + 1), expressions.get(idx));
                 
-                list.set(idx, result);
-                list.remove(idx + 1);
-                list.remove(idx - 1);                
+                expressions.set(idx, result);
+                expressions.remove(idx + 1);
+                expressions.remove(idx - 1);                
             }
         }
-        return list.get(0);
+        return expressions.get(0);
     }
     
-    private List<String> makeList(String expression) {                  
-        List<String> list = new ArrayList<>();
+    private List<String> parseExpression(String expression) {                  
+        List<String> expressions = new ArrayList<>();
         
         StringBuilder number = new StringBuilder();
         for (char ch : expression.toCharArray()) {
             if (ch == '+' || ch == '-' || ch == '*') {
-                list.add(number.toString());
-                list.add(Character.toString(ch));
+                expressions.add(number.toString());
+                expressions.add(Character.toString(ch));
                 number.setLength(0);
             } else {
                 number.append(ch);
             }
         }
-        list.add(number.toString());
+        expressions.add(number.toString());
 
-        return list;
+        return expressions;
     }
     
     private List<String[]> generateOrder() {
@@ -62,20 +59,20 @@ class Solution {
         return orders;
     }
     
-    private String calculateSign(String first, String second, String sign) {
-        long f = Long.parseLong(first);
-        long s = Long.parseLong(second);
+    private String applyOperation(String first, String second, String operator) {
+        long num1 = Long.parseLong(first);
+        long num2 = Long.parseLong(second);
         
-        if (sign.equals("+")) {
-            return Long.toString(f + s);
+        if (operator.equals("+")) {
+            return Long.toString(num1 + num2);
         }
         
-        if (sign.equals("-"))  {
-            return Long.toString(f - s);
+        if (operator.equals("-"))  {
+            return Long.toString(num1 - num2);
         }
         
-        if (sign.equals("*"))  {
-            return Long.toString(f * s);
+        if (operator.equals("*"))  {
+            return Long.toString(num1 * num2);
         }
         
         return "0";
