@@ -7,8 +7,7 @@ class Solution {
         
         int[][] board = generateBoard(rows, columns);
         for (int i = 0; i < queryLen; i++) {
-            int result = transform(queries[i], board);
-            answer[i] = result;
+            answer[i] = transform(queries[i], board);
         }
         
         return answer;
@@ -20,25 +19,30 @@ class Solution {
         int toY = range[2] - 1;
         int toX = range[3] - 1;
         
-        int[][] ds = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};  
+        int[] dy = {0, 1, 0, -1};
+        int[] dx = {1, 0, -1, 0};
         
-        int[] cur = {fromY, fromX};
         int temp = board[fromY][fromX];
         int min = temp;
-
-        for (int[] d : ds) {
+        int curY = fromY;
+        int curX = fromX;
+        
+        for (int d = 0; d < 4; d++) {
             while (true) {
                 int num = temp;
-                int[] next = {cur[0] + d[0], cur[1] + d[1]};    
-                if (next[0] >= fromY && next[0] <= toY && next[1] >= fromX && next[1] <= toX) {
-                    min = Math.min(min, num);
-                    temp = board[next[0]][next[1]];
-                    board[next[0]][next[1]] = num;
-                    cur[0] = next[0];
-                    cur[1] = next[1];
-                } else {
+                int nextY = curY + dy[d];
+                int nextX = curX + dx[d];
+
+                if (nextY < fromY || nextY > toY || nextX < fromX || nextX > toX) {
                     break;
                 }
+
+                temp = board[nextY][nextX];
+                board[nextY][nextX] = num;
+                min = Math.min(min, board[nextY][nextX]);
+
+                curY = nextY;
+                curX = nextX;
             }
         }
         
@@ -47,10 +51,9 @@ class Solution {
     
     private int[][] generateBoard(int rows, int columns) {
         int[][] board = new int[rows][columns];
-        int num = 1;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                board[i][j] = num++;
+                board[i][j] = i * columns + j + 1;
             }
         }
         return board;
