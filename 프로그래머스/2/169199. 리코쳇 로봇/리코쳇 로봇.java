@@ -31,11 +31,13 @@ class Solution {
                 int[] next = new int[]{cur[0], cur[1]};
 
                 while (true) {
-                    next = new int[]{next[0] + d[0], next[1] + d[1]};
+                    next[0] += d[0];
+                    next[1] += d[1];
                     
                     if (next[0] < 0 || next[0] >= row || next[1] < 0 || next[1] >= col 
                         || board[next[0]][next[1]].equals("D")) {
-                        next = new int[]{next[0] - d[0], next[1] - d[1]};
+                        next[0] -= d[0];
+                        next[1] -= d[1];
                         break;
                     }
                  }
