@@ -6,7 +6,6 @@ class Solution {
         int[] start = startPosition(newBoard);
                 
         return process(newBoard, start);
-        
     }
     
     private int process(String[][] board, int[] start) {
@@ -19,6 +18,7 @@ class Solution {
         
         int[][] ds = {{0, 1}, {-1, 0}, {1, 0}, {0, -1}};
         boolean[][] v = new boolean[row][col];
+        v[start[0]][start[1]] = true;
         
         while (!q.isEmpty()) {
             int[] cur = q.poll();
@@ -64,7 +64,7 @@ class Solution {
     
     private String[][] initBoard(String[] board) {
         String[][] newBoard = new String[board.length][];
-
+        
         for (int i = 0; i < board.length; i++) {
             newBoard[i] = board[i].split("");
         }
