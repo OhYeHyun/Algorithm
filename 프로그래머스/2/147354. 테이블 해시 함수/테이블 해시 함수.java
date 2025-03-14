@@ -4,17 +4,13 @@ class Solution {
     public int solution(int[][] data, int col, int row_begin, int row_end) {     
         int answer = 0;
         
-        Arrays.sort(data, new Comparator<int[]>() {
+        Arrays.sort(data, (d1, d2) -> {
+            int target = col - 1;
 
-            @Override
-            public int compare(int[] d1, int[] d2) {
-                int target = col - 1;
-
-                if (d1[target] == d2[target]) {
-                    return d2[0] - d1[0];
-                } else {
-                    return d1[target] - d2[target];
-                }
+            if (d1[target] == d2[target]) {
+                return d2[0] - d1[0];
+            } else {
+                return d1[target] - d2[target];
             }
         });
         
