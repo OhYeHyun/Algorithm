@@ -17,7 +17,7 @@ class Solution {
     
     private void dfs(int idx, int[] rate) {
         if (idx == rate.length) {
-            int[] result = cal(users, emoticons, rate);
+            int[] result = cal(rate);
             if (answer[0] < result[0] || (answer[0] == result[0] && answer[1] < result[1])) {
                 answer = result;
             }
@@ -30,7 +30,7 @@ class Solution {
         }
     }
     
-    private int[] cal(int[][] users, int[] emoticons, int[] rate) {
+    private int[] cal(int[] rate) {
         int[] answer = new int[2];
         
         for (int[] user : users) {
