@@ -12,19 +12,23 @@ class Solution {
         this.q = q;
         this.ans = ans;
         
-        dfs(0, new ArrayList<>());
+        dfs(0, new HashSet<>());
         
         return answer;
     }
     
-    private void dfs(int cur, List<Integer> target) {
+    private void dfs(int cur, Set<Integer> target) {
         if (target.size() == 5) {
             boolean s = true;
             
             for (int i = 0; i < q.length; i++) {
-                int targetC = (int) Arrays.stream((q[i])).filter(c -> target.contains(c)).count();
+                int count = 0;
                 
-                if (targetC != ans[i]) {
+                for (int c : q[i]) {
+                    if (target.contains(c)) count++;
+                }
+                
+                if (count != ans[i]) {
                     s = false;
                     break;
                 };
@@ -34,12 +38,13 @@ class Solution {
                 answer++;
             }
             
-        } else {
-            for (int i = cur + 1; i <= n; i++) {
-                target.add(i);
-                dfs(i, target);
-                target.remove(Integer.valueOf(i));
-            }
+            return;
+        } 
+        
+        for (int i = cur + 1; i <= n; i++) {
+            target.add(i);
+            dfs(i, target);
+            target.remove(i);
         }
         
     }
