@@ -2,40 +2,28 @@ import java.util.*;
 
 class Solution {
     public int solution(int[] cards) {
-        int answer1 = 0;
-        int answer2 = 0;
+        List<Integer> answer = new ArrayList<>();
         int n = cards.length;
         
         boolean[] v = new boolean[n];
         
         for (int i = 0; i < n; i++) {            
-            if (v[i]) continue;
-            
-            int cur = cards[i];
             int idx = i;
             int r = 0;
             
-            while (true) {
+            while (!v[idx]) {
                 v[idx] = true;
                 r++;
-                idx = cur - 1;
-                cur = cards[idx];
-                
-                if (v[idx]) break;
+                idx = cards[idx] - 1;
             }
             
             if (r != 0) {
-                if (answer2 < r) {
-                    if (r <= answer1) {
-                        answer2 = r;
-                    } else if (answer1 < r) {
-                        answer2 = answer1;
-                        answer1 = r;   
-                    }
-                }
+                answer.add(r);
             }
         }        
+        
+        Collections.sort(answer, Comparator.reverseOrder());
                 
-        return answer1 * answer2;
+        return answer.size() == 1 ? 0 : answer.get(0) * answer.get(1);
     }
 }
