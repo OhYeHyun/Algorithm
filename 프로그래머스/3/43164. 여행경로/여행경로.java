@@ -1,11 +1,14 @@
 import java.util.*;
 
 class Solution {
+    String[][] tickets;
     boolean[] visited;
     String[] answer;
     boolean finished = false;
 
     public String[] solution(String[][] tickets) {
+        this.tickets = tickets;
+        
         int n = tickets.length;
         visited = new boolean[n];
 
@@ -17,12 +20,12 @@ class Solution {
         List<String> route = new ArrayList<>();
         route.add("ICN");
 
-        dfs("ICN", tickets, route, 0);
+        dfs("ICN", route, 0);
 
         return answer;
     }
 
-    private void dfs(String cur, String[][] tickets, List<String> route, int used) {
+    private void dfs(String cur, List<String> route, int used) {
         if (finished) return;
 
         if (used == tickets.length) {
@@ -36,7 +39,7 @@ class Solution {
                 visited[i] = true;
                 route.add(tickets[i][1]);
 
-                dfs(tickets[i][1], tickets, route, used + 1);
+                dfs(tickets[i][1], route, used + 1);
 
                 visited[i] = false;
                 route.remove(route.size() - 1);
